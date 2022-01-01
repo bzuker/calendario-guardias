@@ -76,7 +76,7 @@
 	}
 </script>
 
-<div class="flex flex-grow w-full h-screen">
+<div class="flex flex-grow w-full min-h-screen">
 	<div class="flex flex-col flex-grow">
 		<div class="flex items-center justify-center mt-4">
 			<Arrow left on:click={toPrev} />
@@ -109,9 +109,9 @@
 							{/if}
 							<div class="flex flex-col px-1 py-1 overflow-auto space-y-2">
 								{#each getTodayEvents(current[idxw][idxd], events) as event (event.title)}
-									<div class="flex items-center flex-shrink-0 h-5 px-1 text-xs hover:bg-gray-200">
+									<div class="flex items-center w-full flex-1 h-5 px-1">
 										<span
-											class={`font-medium leading-none truncate py-1 px-3 rounded`}
+											class={`w-full text-center font-semibold antialiased leading-none truncate py-2 px-3 rounded`}
 											style={event.style}
 										>
 											{event.title}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Person } from '$lib/shifts.js';
-	import { deletePerson } from '../stores/stores';
+	import { deletePerson, updatePerson } from '../stores/stores';
 
 	export let person: Person;
 	console.log(person);
@@ -11,7 +11,17 @@
 </script>
 
 <li class="bg-white flex items-center shadow-sm border border-gray-200 rounded-lg my-2 py-2 px-4">
-	<input name="color" type="color" bind:value={person.color} class="mr-2 h-5 w-5" />
+	<input
+		name="color"
+		type="color"
+		bind:value={person.color}
+		on:change={(e) =>
+			updatePerson({
+				...person,
+				color: e.currentTarget.value
+			})}
+		class="mr-2 h-5 w-5"
+	/>
 	<span class={`flex-1 text-gray-800`}>
 		{person.name}
 	</span>

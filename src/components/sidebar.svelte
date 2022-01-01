@@ -8,6 +8,7 @@
 	import Person from './person.svelte';
 
 	let now = new Date();
+	let loading = false;
 
 	const startOfNextMonth = startOfMonth(addMonths(now, 1));
 	const endOfNextMonth = endOfMonth(startOfNextMonth);
@@ -22,9 +23,19 @@
 	let minimumPeoplePerDay = 3;
 	let maxPeoplePerDay = 4;
 
-	function getShifts() {
-		$shifts = [];
+	function wait(time) {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve();
+			}, time);
+		});
+	}
+
+	async function getShifts() {
 		let found = false;
+		loading = true;
+		await wait(1);
+		$shifts = [];
 
 		for (let index = 0; index < 2000; index++) {
 			try {
@@ -37,12 +48,10 @@
 				);
 				$shifts = newShifts;
 				found = true;
-				return;
-			} catch (error) {
-				// alert('No encontré combinaciones. Volvé a intentar!');
-			}
+			} catch (error) {}
 		}
 
+		loading = false;
 		if (!found) {
 			alert('No encontré combinaciones. Volvé a intentar o cambiá algunas reglas');
 		}
@@ -186,10 +195,11 @@
 
 			<div class="px-4">
 				<button
+					disabled={loading}
 					class="w-full shadow-sm rounded bg-blue-500 hover:bg-blue-600 text-white py-2 px-4"
 					on:click={() => getShifts()}
 				>
-					Calcular
+					{loading ? 'Buscando...' : 'Calcular'}
 				</button>
 			</div>
 		</nav>
