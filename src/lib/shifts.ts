@@ -193,8 +193,11 @@ export function getShiftsForDay(
 	// Get the available people for the given day
 	const availablePeople = people.filter((person) => {
 		// Check if the person is unavailable on the given day
+
 		const ruleForDay = person.rules.find((rule) => isEqual(rule.date, day));
 		if (ruleForDay?.condition === 'unavailable') {
+			console.log('No está disponible el día', format(day, 'dd/MM/yyyy'));
+
 			return false;
 		}
 
