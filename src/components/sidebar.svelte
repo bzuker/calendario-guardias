@@ -59,8 +59,8 @@
 </script>
 
 <nav class="flex-shrink-0 w-72 overflow-auto">
-	<div class="flex flex-col h-full bg-gray-200 bg-opacity-30 ">
-		<nav class="mt-3 pb-12">
+	<div class="flex flex-col bg-gray-200 bg-opacity-30 relative">
+		<nav class="mt-3">
 			<div class="flex w-full items-center justify-center text-sm antialiased font-medium">
 				Fechas a calcular
 			</div>
@@ -184,7 +184,7 @@
 				Personas
 			</div>
 			<hr class="my-3" />
-			<div class="px-4">
+			<div class="px-4 mb-8">
 				<PersonForm />
 				<ul>
 					{#each $people as person (person.name)}
@@ -193,10 +193,10 @@
 				</ul>
 			</div>
 
-			<div class="px-4">
+			<div class="sticky bottom-0 w-full">
 				<button
 					disabled={loading}
-					class="w-full shadow-sm rounded bg-blue-500 hover:bg-blue-600 text-white py-2 px-4"
+					class="w-full shadow-sm bg-blue-500 hover:bg-blue-600 text-white py-2 px-4"
 					on:click={() => getShifts()}
 				>
 					{loading ? 'Buscando...' : 'Calcular'}
